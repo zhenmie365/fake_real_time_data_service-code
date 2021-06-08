@@ -1,0 +1,30 @@
+ROSTemplateFormatVersion: '2015-09-01'
+Transform: 'Aliyun::Serverless-2018-04-03'
+Resources:
+    Strategy_watch:
+        Type: 'Aliyun::Serverless::Service'
+        Properties:
+          Description: 'the functions for stocks which user selected operation'
+          Role: 'acs:ram::1075953029657988:role/role-for-fc-access-mysql'
+          VpcConfig:
+            VpcId: vpc-wz9s5l4qnp3qrib0p68v4
+            VSwitchIds:
+              - vsw-wz92m2u0qhfzv4csaujk8
+            SecurityGroupId: sg-wz9apu1bn3mcxj53xyju
+          InternetAccess: true
+        UserSelectedStocksService:
+          Type: 'Aliyun::Serverless::Function'
+          Properties:
+            Handler: 'index.handler'
+            Initializer: 'index.initializer'
+            Runtime: python3
+            Timeout: 300
+            MemorySize: 1024
+            CodeUri: './'
+            Description: 'the functions for stocks which user selected operation'
+          Events:
+            UserSelectedStocksServiceHttpTrigger:
+              Type: HTTP
+              Properties:
+                AuthType: ANONYMOUS
+                Methods: ['GET', 'POST', 'PUT', 'DELETE']
