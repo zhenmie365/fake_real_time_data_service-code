@@ -14,11 +14,11 @@ def initializer(context):
     global init_db_con
     try:
         init_db_con = pymysql.connect(
-            host='rm-wz9uxu2x6pv2z85by.mysql.rds.aliyuncs.com',
+            host='rm-bp1y26j8fi5a84hl0.mysql.rds.aliyuncs.com',
             port=3306,
-            user='admin_berg',
-            passwd='Black1000',
-            db='stock_data',
+            user='lion_watch_admin',
+            passwd='LionWatch2021',
+            db='lion_watch_db',
             connect_timeout=5)
     except Exception as e:
         logger.error(e)
